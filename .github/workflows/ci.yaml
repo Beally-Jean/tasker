@@ -30,7 +30,7 @@ jobs:
 
       - name: build and push images
         run: |
-          BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
+          export BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
           docker-compose build
           docker-compose push
 
