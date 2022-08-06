@@ -30,7 +30,7 @@ jobs:
 
       - name: build and push images
         run: |
-          IMAGE=${IMAGE_REGISTRY}:${IMAGE_TAG}
+          IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
           echo $IMAGE
           docker image build -t ${IMAGE}
           docker image push ${IMAGE}
