@@ -4,7 +4,7 @@ class WorkspaceController {
 
     async getWorkspaces(req, res) {
         try{
-            const userId = req.query.user_id
+            const userId = req.cookies.user_id
             if (!userId) {
                 throw Error("no have user_id")
             }
