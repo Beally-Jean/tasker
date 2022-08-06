@@ -2,9 +2,9 @@ FROM node:16 AS builder
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
-RUN yarn install && yarn build
+RUN npm install --only=production && npm run build
 
 ######################################
 
