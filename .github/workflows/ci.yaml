@@ -5,7 +5,7 @@ on:
     - backend
 
 env:
-  IMAGE_REGISTRY: ghcr.io/Beally-Jean/tasker-backend
+  IMAGE_REGISTRY: ghcr.io/beally-jean/tasker-backend
 
 jobs:
   build:
@@ -31,7 +31,6 @@ jobs:
       - name: build and push images
         run: |
           IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          IMAGE=$(echo $IMAGE | awk '{print tolower($0)}'
           docker image build -t ${IMAGE}
           docker image push ${IMAGE}
 
