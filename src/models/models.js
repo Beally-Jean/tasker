@@ -33,22 +33,22 @@ const UserWorkspaceLinks = sequelize.define('user_workspace_links', {
 //описание связей
 
 //многие ко многим User и Workspace
-User.belongsToMany(WorkSpace, {through: UserWorkspaceLinks})
+User.belongsToMany(WorkSpace, {through: UserWorkspaceLinks, onDelete: 'CASCADE'})
 WorkSpace.belongsToMany(User, {through: UserWorkspaceLinks})
 
-User.hasMany(Task, {as: 'owner', foreignKey: 'owner_id'})
+User.hasMany(Task, {as: 'owner', foreignKey: 'owner_id', onDelete: 'CASCADE'})
 Task.belongsTo(User, {foreignKey: 'owner_id'})
 
-User.hasMany(Task, {as: 'responsible', foreignKey: 'responsible_id'})
+User.hasMany(Task, {as: 'responsible', foreignKey: 'responsible_id', onDelete: 'CASCADE'})
 Task.belongsTo(User, {foreignKey: 'responsible_id'})
 
-WorkSpace.hasMany(Task, {as: 'workspace_task', foreignKey: 'workspace_id'})
+WorkSpace.hasMany(Task, {as: 'workspace_task', foreignKey: 'workspace_id', onDelete: 'CASCADE'})
 Task.belongsTo(WorkSpace, {foreignKey: 'workspace_id'})
 
-WorkSpace.hasMany(TaskStatus, {as: 'workspace_task_status', foreignKey: 'workspace_id'})
+WorkSpace.hasMany(TaskStatus, {as: 'workspace_task_status', foreignKey: 'workspace_id', onDelete: 'CASCADE'})
 TaskStatus.belongsTo(WorkSpace, {foreignKey: 'workspace_id'})
 
-TaskStatus.hasMany(Task, {as: 'status', foreignKey: 'status_id'})
+TaskStatus.hasMany(Task, {as: 'status', foreignKey: 'status_id', onDelete: 'CASCADE'})
 Task.belongsTo(TaskStatus, {foreignKey: 'status_id'})
 
 module.exports = {
