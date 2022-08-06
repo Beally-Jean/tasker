@@ -13,7 +13,6 @@ services:
     image: ${BACKEND_IMAGE}
     build:
       context: ./src
-      dockerfile: ./src/Dockerfile
     env_file:
       - .env
     depends_on:
