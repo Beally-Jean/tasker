@@ -4,39 +4,42 @@ class WorkspaceController {
 
     async getWorkspaces(req, res) {
         try{
-            const userId = req.cookies.user_id
-            if (!userId) {
-                throw Error("no have user_id")
-            }
+            const { user_id } = req.query
 
-            const workspaces = await WorkSpace.findAll({
+            const workspacesRes = await WorkSpace.findAll({
                 include: [{
                     model: User,
                     through: {
                         where: {
-                            id: userId
+                            id: user_id
                         }
                     }
                 }]
             })
 
-            return res.json(workspaces)
+            let workspaces = []
+            await workspacesRes.forEach((workspace) => {
+                workspaces.push({id: workspace.id, name: workspace.name})
+            })
+
+            return res.json({workspaces})
         } catch(e) {
-            console.log(e.message)
-            return res.json({workspaces: []})
+            return res.status(400).json({errors: [{error: e.message}]})
         }
     }
 
     async createWorkspace(req, res) {
         try {
             const nameWorkspace = req.body.name
-            const userId = req.body.users.user_id
+            const users = req.body.users
 
-            if (!userId) {
-                throw Error("no have user_id")
-            }
             const workspace = await WorkSpace.create({name: nameWorkspace})
-            UserWorkspaceLinks.create({userId, workspaceId: workspace.id})
+            await users.forEach((user_id) => {
+                UserWorkspaceLinks.create({
+                    workspaceId: workspace.id,
+                    userId: user_id
+                })
+            })
 
             TaskStatus.create({
                 name: "No status",
@@ -63,26 +66,21 @@ class WorkspaceController {
     async getWorkspaceById(req, res) {
         try{
             const {workspace_id} = req.params
-            if (!workspace_id) {
-                throw Error("no have workspace_id")
-            }
+
             const workspace = await WorkSpace.findOne({where: {id: workspace_id}})
             return res.json(workspace)
 
         } catch(e) {
-            return res.json(null)
+            return res.status(400).json({errors: [{error: e.message}]})
         }
     }
 
     async deleteWorkspace(req, res) {
         try{
-            const {workspaceId} = req.params
-            if (!workspaceId) {
-                throw Error("no have workspaceId")
-            }
+            const {workspaceId} = req.body
             const count = await WorkSpace.destroy({where: {id: workspaceId}})
             if (count === 0) {
-                throw Error("some error message")
+                throw Error("record not delete")
             }
             return res.json({success: true})
 
