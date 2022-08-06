@@ -31,8 +31,8 @@ jobs:
       - name: build and push images
         run: |
           BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker image build -t ${BACKEND_IMAGE} .
-          docker image push ${BACKEND_IMAGE}
+          docker-compose build
+          docker-compose push
 
   deploy:
     name: run the app
