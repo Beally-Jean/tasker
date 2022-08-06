@@ -53,7 +53,7 @@ jobs:
       
       - name: create .env
         run: |
-          echo "${DOTENV}"" > .env
+          echo "${DOTENV}" > .env
 
       - name: run app
         run: |
