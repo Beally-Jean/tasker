@@ -6,6 +6,7 @@ on:
 
 env:
   IMAGE_REGISTRY: ghcr.io/beally-jean/tasker-backend
+  DOTENV: ${{ secrets.DOTENV }}
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
 
       - name: create .env
         run: |
-          echo "${{ secrets.DOTENV }}" > .env
+          echo ${DOTENV} > .env
 
       - name: build and push images
         run: |
@@ -52,7 +53,7 @@ jobs:
       
       - name: create .env
         run: |
-          echo ${{ secrets.DOTENV }} > .env
+          echo ${DOTENV} > .env
           cat .env
 
       - name: run app
