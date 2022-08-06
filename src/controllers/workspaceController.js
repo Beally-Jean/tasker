@@ -1,11 +1,11 @@
-const {WorkSpace, User, UserWorkspaceLinks} = require('../models/models')
+const {WorkSpace, User, UserWorkspaceLinks, TaskStatus} = require('../models/models')
 
 class WorkspaceController {
 
     async getWorkspaces(req, res) {
         try{
-            const user_id = req.query.user_id
-            if (!user_id) {
+            const userId = req.query.user_id
+            if (!userId) {
                 throw Error("no have user_id")
             }
 
@@ -22,6 +22,7 @@ class WorkspaceController {
 
             return res.json(workspaces)
         } catch(e) {
+            console.log(e.message)
             return res.json({workspaces: []})
         }
     }
@@ -36,6 +37,22 @@ class WorkspaceController {
             }
             const workspace = await WorkSpace.create({name: nameWorkspace})
             UserWorkspaceLinks.create({userId, workspaceId: workspace.id})
+
+            TaskStatus.create({
+                name: "No status",
+                order: 0,
+                workspace_id: workspace.id
+            })
+            TaskStatus.create({
+                name: "In progress",
+                order: 5,
+                workspace_id: workspace.id
+            })
+            TaskStatus.create({
+                name: "Done",
+                order: 10,
+                workspace_id: workspace.id
+            })
 
             return res.json({workspaceId: workspace.id})
         } catch(e) {
