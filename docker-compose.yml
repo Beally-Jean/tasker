@@ -10,7 +10,7 @@ services:
     restart: always
 
   tracker-backend:
-    image: 'tracker-backend:latest'
+    image: ${BACKEND_IMAGE}
     build:
       context: .
     env_file:

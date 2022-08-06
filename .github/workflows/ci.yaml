@@ -26,7 +26,6 @@ jobs:
       - name: create .env
         run: |
           echo "${{ secrets.DOTENV }}" > .env
-          cat .env
 
       - name: build and push images
         run: |
@@ -58,5 +57,6 @@ jobs:
 
       - name: run app
         run: |
+          BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
           docker-compose pull
           docker-compose up -d
