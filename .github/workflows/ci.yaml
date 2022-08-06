@@ -1,0 +1,63 @@
+name: Deploy
+on: 
+  push:
+    branches:
+    - backend
+
+env:
+  IMAGE_TAG: ghcr.io/Beally-Jean/tasker-backend:${GITHUB_SHA}
+
+jobs:
+  build:
+    name: build docker image
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2.3.4
+        with:
+          submodules: true
+
+      - uses: docker/login-action@v1
+        name: login to ghcr
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: create .env
+        run: |
+          echo ${{ secrets.DOTENV }} > .env
+          cat .env
+
+      - name: build and push images
+        run: |
+          echo $IMAGE_TAG
+          docker image build -t ${IMAGE_TAG}
+          docker image push ${IMAGE_TAG}
+
+  deploy:
+    name: run the app
+    runs-on: self-hosted
+    needs: 
+    - build
+    steps:
+      - uses: actions/checkout@v2.3.4
+        with: 
+          ref: ci
+          submodules: true
+      
+      - uses: docker/login-action@v1
+        name: login to ghcr
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: create .env
+        run: |
+          echo ${{ secrets.DOTENV }} > .env
+          cat .env
+
+      - name: run app
+        run: |
+          docker-compose pull
+          docker-compose up -d
