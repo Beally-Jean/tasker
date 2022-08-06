@@ -31,8 +31,8 @@ jobs:
       - name: build and push images
         run: |
           export BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker-compose build
-          docker-compose push
+          docker-compose --project-name tasker-backend build
+          docker-compose --project-name tasker-backend push
 
   deploy:
     name: run the app
@@ -58,5 +58,5 @@ jobs:
       - name: run app
         run: |
           export BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker-compose pull
-          docker-compose up -d
+          docker-compose --project-name tasker-backend pull
+          docker-compose --project-name tasker-backend up -d

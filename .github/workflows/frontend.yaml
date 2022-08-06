@@ -6,6 +6,7 @@ on:
 
 env:
   IMAGE_REGISTRY: ghcr.io/beally-jean/tasker-frontend
+  PROJECT_NAME: tasker-frontend
 
 jobs:
   build:
@@ -26,8 +27,8 @@ jobs:
       - name: build and push images
         run: |
           export FRONTEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker-compose build
-          docker-compose push
+          docker-compose --project-name ${PROJECT_NAME} build
+          docker-compose --project-name ${PROJECT_NAME} push
 
   deploy:
     name: run the app
@@ -49,5 +50,5 @@ jobs:
       - name: run app
         run: |
           export FRONTEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker-compose pull
-          docker-compose up -d
+          docker-compose --project-name ${PROJECT_NAME} pull
+          docker-compose --project-name ${PROJECT_NAME} up -d
