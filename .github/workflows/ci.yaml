@@ -30,9 +30,9 @@ jobs:
 
       - name: build and push images
         run: |
-          IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker image build -t ${IMAGE} .
-          docker image push ${IMAGE}
+          BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
+          docker image build -t ${BACKEND_IMAGE} .
+          docker image push ${BACKEND_IMAGE}
 
   deploy:
     name: run the app
@@ -58,6 +58,6 @@ jobs:
 
       - name: run app
         run: |
-          BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
+          export BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
           docker-compose pull
           docker-compose up -d
