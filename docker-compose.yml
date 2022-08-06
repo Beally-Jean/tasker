@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  tasker-frontend:
+    container_name: tasker-frontend
+    image: ${FRONTEND_IMAGE}
+    build:
+      context: .
+    ports:
+    - 13337:80
+    restart: always
