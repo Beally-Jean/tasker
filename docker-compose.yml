@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:14.4-bullseye
+    env_file:
+      - .env
+    volumes:
+      - tracker-db:/var/lib/postgresql/data
+    restart: always
+
+  tracker-backend:
+    image: 'tracker-backend:latest'
+    build:
+      context: .
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+    restart: always
+
+volumes:
+  tracker-db:
