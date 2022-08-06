@@ -2,11 +2,11 @@ name: Deploy
 on: 
   push:
     branches:
-    - backend
+    - frontend
 
 env:
-  IMAGE_REGISTRY: ghcr.io/beally-jean/tasker-backend
-  DOTENV: ${{ secrets.DOTENV }}
+  IMAGE_REGISTRY: ghcr.io/beally-jean/tasker-frontend
+  PROJECT_NAME: tasker-frontend
 
 jobs:
   build:
@@ -24,15 +24,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: create .env
-        run: |
-          echo "${DOTENV}" > .env
-
       - name: build and push images
         run: |
-          export BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker-compose build
-          docker-compose push
+          export FRONTEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
+          docker-compose --project-name ${PROJECT_NAME} build
+          docker-compose --project-name ${PROJECT_NAME} push
 
   deploy:
     name: run the app
@@ -50,13 +46,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: create .env
-        run: |
-          echo "${DOTENV}" > .env
 
       - name: run app
         run: |
-          export BACKEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
-          docker-compose pull
-          docker-compose up -d
+          export FRONTEND_IMAGE=${IMAGE_REGISTRY}:${GITHUB_SHA}
+          docker-compose --project-name ${PROJECT_NAME} pull
+          docker-compose --project-name ${PROJECT_NAME} up -d
