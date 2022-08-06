@@ -1,26 +1,31 @@
-const {Task, WorkSpace} = require('../models/models')
+const {Task} = require('../models/models')
 
 class TaskController {
     
     async getTasksInWorkspace(req, res) {
         try {
             const {workspace_id} = req.params
+            
             const tasks = await Task.findAll({
-                include: [{
-                    model: WorkSpace,
-                    through: {
-                        where: {
-                            id: workspace_id
-                        }
-                    }
-                }]
+                where: {
+                    workspace_id
+                }
             })
             return res.json(tasks)
         } catch(e) {
-            console.log(e)
-            return res.json({tasks: []})
+            return res.status(400).json({errors: [{error: e.message}]})
         }
-    } 
+    }
+    
+    async getTaskById(req, res) {
+        try {
+            const { task_id } = req.params
+            const task = await Task.findOne({where: {id: task_id}})
+            return res.json(task)
+        } catch(e) {
+            return res.status(400).json({errors: [{error: e.message}]})
+        }
+    }
 
     async createTask(req, res) {
         try {

@@ -1,25 +1,30 @@
-const { TaskStatus, WorkSpace } = require('../models/models')
+const { TaskStatus } = require('../models/models')
 
 class StatusController {
     async getStatusesInWorkspace(req, res) {
         try {
             const { workspace_id } = req.params
             const statuses = await TaskStatus.findAll({
-                include: [{
-                    model: WorkSpace,
-                    through: {
-                        where: {
-                            id: workspace_id
-                        }
-                    }
-                }]
+                where: {
+                    workspace_id
+                }
             })
             return res.json(statuses)
         } catch(e) {
-            return res.json({statuses: []})
+            return res.status(400).json({errors: [{error: e.message}]})
         }
         
 
+    }
+
+    async getStatusById(req, res) {
+        try {
+            const { status_id } = req.params
+            const status = await TaskStatus.findOne({where: {id: status_id}})
+            return res.json(status)
+        } catch(e) {
+            return res.status(400).json({errors: [{error: e.message}]})
+        }
     }
 
     async createStatus(req, res) {

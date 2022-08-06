@@ -10,6 +10,8 @@ const statusContoller = require('../controllers/statusController')
 router.get('/:workspace_id', workspaceContoller.getWorkspaceById)
 router.get('/:workspace_id/get_tasks', taskController.getTasksInWorkspace)
 router.get('/:workspace_id/get_statuses', statusContoller.getStatusesInWorkspace)
+router.get('/:workspace_id/task/:task_id', taskController.getTaskById)
+router.get('/:workspace_id/status/:status_id', statusContoller.getStatusById)
 
 //post-запросы на создание
 router.post('/:workspace_id/create_task', taskController.createTask)
