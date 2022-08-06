@@ -2,6 +2,7 @@ version: "3"
 
 services:
   postgres:
+    container_name: tasker-postgres
     image: postgres:14.4-bullseye
     env_file:
       - .env
@@ -9,7 +10,8 @@ services:
       - tracker-db:/var/lib/postgresql/data
     restart: always
 
-  tracker-backend:
+  tasker-backend:
+    container_name: tasker-backend
     image: ${BACKEND_IMAGE}
     build:
       context: ./src
