@@ -5,7 +5,7 @@ on:
     - backend
 
 env:
-  IMAGE_TAG: ghcr.io/Beally-Jean/tasker-backend:${GITHUB_SHA}
+  IMAGE_REGISTRY: ghcr.io/Beally-Jean/tasker-backend
 
 jobs:
   build:
@@ -25,14 +25,15 @@ jobs:
 
       - name: create .env
         run: |
-          echo ${{ secrets.DOTENV }} > .env
+          echo "${{ secrets.DOTENV }}" > .env
           cat .env
 
       - name: build and push images
         run: |
-          echo $IMAGE_TAG
-          docker image build -t ${IMAGE_TAG}
-          docker image push ${IMAGE_TAG}
+          IMAGE=${IMAGE_REGISTRY}:${IMAGE_TAG}
+          echo $IMAGE
+          docker image build -t ${IMAGE}
+          docker image push ${IMAGE}
 
   deploy:
     name: run the app
