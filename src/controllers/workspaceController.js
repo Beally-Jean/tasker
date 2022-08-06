@@ -4,7 +4,7 @@ const ApiError = require('../error/ApiError')
 class WorkspaceController {
 
     async getWorkspaces(req, res) {
-        
+        return res.json("Get All Workspaces of User")
     }
 
     async createWorkspace(req, res) {
