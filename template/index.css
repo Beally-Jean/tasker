@@ -1,5 +1,20 @@
-.App{
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: rgb(239,239,239);
+}
+
+html{
     height: 100%;
+}
+
+body {
+    height: 100%;
+    background: rgb(70,90,101);
 }
 
 .container {
@@ -14,35 +29,17 @@
 header{
     display: flex;
     width: 80%;
-    height: 80px;
+    height: 10%;
     background: rgb(39,50,56);
     border-radius: 0 0 10px 10px;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     /* box-shadow: 0px 1px 1px 1px rgb(41, 116, 159); */
 }
 
-header input {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 5px;
-    max-height: 30px;    
-    height: 100%;
-    border: 1px solid black;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-/* header .title{
-    
-}
-
-header .description {
-    
-} */
-
-.hint h1{
-    text-align: center;
+header h1{
+    color: aliceblue;
+    font-size: 4vmax;
 }
 
 .main {
@@ -99,6 +96,9 @@ header .description {
     width: 100%;
 }
 
+.workspace .description p{
+}
+
 .workspace .progress{
     position: absolute;
     bottom: 25px;
@@ -137,34 +137,6 @@ footer:hover{
 }
 
 footer:active{
-    transform: scale(1);
-    border-radius: 0;
-}
-
-.back {
-    position: fixed;
-    display: flex;
-    bottom: 10px;
-    right: 10px;
-    background: rgb(31,178,152);
-    max-width: 130px;
-    width: 100%;
-    height: 60px;
-    border: none;
-    color: white;
-    border-radius: 20px;
-    font-size: 20px;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s;
-}
-
-.back:hover{
-    transform: scale(1.2);
-    border-radius: 0;
-}
-
-.back:active{
-    transform: scale(1);
+    transform: scale(0.9);
     border-radius: 0;
 }

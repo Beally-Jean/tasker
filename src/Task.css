@@ -1,0 +1,133 @@
+.task-container {
+    max-width: 1800px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* .task-container div:not(:last-child){
+    background: rgb(39,50,56);
+    max-width: 520px;
+    height: 600px;
+    width: 100%;
+    margin-right: 10px;
+}
+
+.task-container div:last-child{
+    background: rgb(39,50,56);
+    max-width: 520px;
+    height: 600px;
+    width: 100%;
+} */
+
+/* .new {
+    
+}
+
+.in-progress {
+    
+}
+
+.finished {
+    
+} */
+
+/* .tasks {
+    height: 100%;
+}
+
+.input-group{
+    margin-top: 10px;
+}
+
+.item {
+    background: rgb(39,50,56);
+    margin-top: 10px;
+    text-align: center;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.tasks-btn{
+    background: rgb(31,178,152);
+    border-radius: 20px;
+    margin-left: 10px;
+    border: 1px solid black;
+    height: 30px;
+}
+
+#add-todo-input{
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 30px;
+}
+
+.ftasker{
+    display: flex;
+    margin: 0 auto;
+    max-width: 1800px;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ftasker input{
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 30px;
+}
+
+.ftasker button{
+    background: rgb(31,178,152);
+    border-radius: 20px;
+    margin-left: 10px;
+    border: 1px solid black;
+    height: 30px;
+}
+
+.ftasker div:not(:first-child){
+    background: rgb(39,50,56);
+    margin-top: 10px;
+    text-align: center;
+    height: 50px;
+    border-radius: 20px;
+    max-width: 200px;
+    width: 100%;
+} */
+
+.task-item {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+}
+
+.task-item > span[role="img"] {
+    margin-right: 10px;
+}
+
+.task-input > input {
+    width: 375px;
+    height: 45px;
+    padding: 0;
+    margin: 0 20px 0 0;
+    border-style: 1px;
+}
+
+.task-input > button {
+    width: 100px;
+    height: 49px;
+}
+
+.ftasker {
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.ftasker > h3 {
+    font-size: 16pt;
+    margin: 40px 0 0;
+    border-bottom: 1px solid #000;
+}
+
