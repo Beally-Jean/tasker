@@ -4,6 +4,7 @@ import HintComponent from "./HintComponent";
 import { useState } from "react";
 // import TaskInspector from "./TaskInspectorComponent";
 import Tasker from "./Tasker";
+import ico from "./ico.png";
 
 // import { ReactDOM } from "react";
 
@@ -26,11 +27,13 @@ export default function HomeComponent(props) {
             ...components,
             { title: spaceTitle, description: spaceDescribtion },
         ]);
-        window.localStorage.setItem("spaces", JSON.stringify({ title: spaceTitle, description: spaceDescribtion }));
+        window.localStorage.setItem(
+            "spaces",
+            JSON.stringify({ title: spaceTitle, description: spaceDescribtion })
+        );
         setSpaceTitle("");
         setSpaceDescribtion("");
         setHint([]);
-        
     }
     function gotoTasks() {
         setDnone("none");
@@ -49,6 +52,7 @@ export default function HomeComponent(props) {
             </button>
             <div className="container" style={{ display: dnone }}>
                 <header>
+                    <img src={ico} alt="" />
                     <input
                         type="text"
                         placeholder="Название"
@@ -56,6 +60,7 @@ export default function HomeComponent(props) {
                         value={spaceTitle}
                         onChange={(e) => setSpaceTitle(e.target.value)}
                     />
+
                     <input
                         type="text"
                         placeholder="Описание"

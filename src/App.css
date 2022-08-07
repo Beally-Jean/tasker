@@ -168,3 +168,11 @@ footer:active{
     transform: scale(1);
     border-radius: 0;
 }
+
+header img{
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: auto;
+    height: 5vh;
+}

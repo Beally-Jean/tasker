@@ -10,7 +10,7 @@ export default function WorkspaceComponent(props) {
                     <p>{props.description}</p>
                 </div>
                 {/* <DescriptionComponent></DescriptionComponent> */}
-                <ProgressBar></ProgressBar>
+                {/* <ProgressBar></ProgressBar> */}
             </div>
         </div>
     );
