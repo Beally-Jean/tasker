@@ -1,10 +1,10 @@
-const {WorkSpace, User, UserWorkspaceLinks, TaskStatus} = require('../models/models')
+const { WorkSpace, User, UserWorkspaceLinks, TaskStatus } = require('../models/models')
 
 class WorkspaceController {
 
     async getWorkspaces(req, res) {
         try{
-            const { user_id } = req.query
+            const { user_id } = req.cookies
 
             const workspacesRes = await WorkSpace.findAll({
                 include: [{
