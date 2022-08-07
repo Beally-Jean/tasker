@@ -15,6 +15,7 @@ router.use('/get_workspaces', getWorkspaces)
 router.use('/delete_workspace', deleteWorkspace)
 
 //регистрация пользователя
-router.post('/user', userController.register)
+router.post('/register', userController.register)
+router.post('/login', userController.login)
 
 module.exports = router
